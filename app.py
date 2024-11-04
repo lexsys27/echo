@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, escape
 
 
 app = Flask(__name__)
@@ -28,7 +28,7 @@ def greet():
     Returns:
         dict: A dictionary containing the 'greeting' with personalized message.
     """
-    name = request.args.get('name', 'human')
+    name = escape(request.args.get('name', 'human'))
     return {'greeting': f'Hello, {name}!'}
 
 
