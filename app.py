@@ -1,5 +1,6 @@
+import os
 from flask import Flask, request
-import html
+
 
 app = Flask(__name__)
 
@@ -14,9 +15,10 @@ def echo():
         dict: A dictionary containing the 'message' key with the value of the
         'q' query parameter.
     """
-    message = html.escape(request.args.get('q', ''))
+    message = request.args.get('q', '')
     return {'message': message}
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    debug_mode = os.getenv('DEBUG', 'false').lower() == 'true'
+    app.run(debug=debug_mode)
