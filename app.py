@@ -1,4 +1,5 @@
 from flask import Flask, request
+import html
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ def echo():
         dict: A dictionary containing the 'message' key with the value of the
         'q' query parameter.
     """
-    message = request.args.get('q', '')
+    message = html.escape(request.args.get('q', ''))
     return {'message': message}
 
 
