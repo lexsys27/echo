@@ -19,6 +19,19 @@ def echo():
     return {'message': message}
 
 
+@app.route('/greet')
+def greet():
+    """
+    Greets a user by name from the query parameter. Uses 'human' if no name 
+    provided.
+
+    Returns:
+        dict: A dictionary containing the 'greeting' with personalized message.
+    """
+    name = request.args.get('name', 'human')
+    return {'greeting': f'Hello, {name}!'}
+
+
 if __name__ == '__main__':
     debug_mode = os.getenv('DEBUG', 'false').lower() == 'true'
     app.run(debug=debug_mode)
